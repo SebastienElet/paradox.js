@@ -543,7 +543,17 @@ class Field {
     switch (this.type) {
       case 1:
         //        |      |            $01     v   "A"  Alpha                                   |
-        this.value = value.toString(encoding);
+        const fieldSize = value.length;
+        const bytesForString = [];
+        for (let i = 0; i < fieldSize; i++) {
+          const b = value[i];
+          if (b !== 0) {
+            bytesForString.push(b);
+          }
+        }
+
+        this.value = String.fromCharCode(...bytesForString);
+
         break;
       case 2:
         //        |      |            $02     4   "D"  Date                                    |
