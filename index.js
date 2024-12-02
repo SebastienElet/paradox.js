@@ -469,6 +469,9 @@ class ParadoxTable {
               if (x.type === 1) {
                 return x.value.replace(/\0/g, "");
               }
+              if (x.type === 21) {
+                return x.value.toISOString();
+              }
               return x.value;
             } else {
               return `[ ${x.typeName} ]`;
@@ -596,6 +599,7 @@ class Field {
         //        |      |            $15     8   "@"  Timestamp                               |
         this.hasBeenProperlyDecoded = false;
         this.value = convertTimestamp(this.valueBuffer, dateOffset);
+
         break;
       case 22:
         //        |      |            $16     4   "+"  Autoincrement                           |
