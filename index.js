@@ -468,7 +468,10 @@ class ParadoxTable {
             if (excluded.indexOf(x.type) === -1) {
               if (x.type === 1) {
                 // FIXME: use a csv library with quote support
-                return x.value.replace(/\0/g, "").replace(/(\n|\r)/g, " ");
+                return x.value
+                  .replace(/\0/g, "")
+                  .replace(/;/g, "")
+                  .replace(/(\n|\r)/g, " ");
               }
               if (x.type === 21) {
                 return x.value.toISOString();
